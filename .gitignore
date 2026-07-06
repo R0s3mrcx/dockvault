@@ -1,0 +1,14 @@
+# Environment variables
+.env
+
+# Backups
+backups/
+*.tar.gz
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS
+.DS_Store
