@@ -4,14 +4,15 @@ setup() {
     PROJECT_DIR="$(cd "$(dirname "$BATS_TEST_FILENAME")/.." && pwd)"
     SCRIPT="$PROJECT_DIR/scripts/restore.sh"
 
-    TEST_TMP="$(mktemp -d)"
-    cp "$PROJECT_DIR/.env.example" "$TEST_TMP/.env.example"
-    cd "$TEST_TMP"
+    cd "$PROJECT_DIR"
+    rm -f .env
+    rm -rf backups
 }
 
 teardown() {
-    cd /
-    rm -rf "$TEST_TMP"
+    docker compose down -v >/dev/null 2>&1 || true
+    rm -f .env
+    rm -rf backups
 }
 
 @test "the script exists and is executable" {
