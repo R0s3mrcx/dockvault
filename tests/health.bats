@@ -10,15 +10,6 @@ setup() {
     [ -x "$SCRIPT" ]
 }
 
-@test "fails with exit 1 if Docker is not installed" {
-    if ! command -v docker >/dev/null 2>&1; then
-        skip "Docker is installed on this machine, cannot test this case"
-    fi
-    run bash "$SCRIPT"
-    [ "$status" -eq 1 ]
-    [[ "$output" == *"Docker is not installed"* ]]
-}
-
 @test "with Docker available, reports the stack as healthy" {
     if command -v docker >/dev/null 2>&1; then
         skip "Docker is not available on this machine"

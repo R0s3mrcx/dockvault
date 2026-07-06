@@ -32,11 +32,28 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y bats
 
+      - name: Create .env
+        run: cp .env.example .env
+
+      - name: Start Docker stack
+        run: docker compose -f compose.yml up -d
+
+      - name: Wait for PostgreSQL
+        run: |
+          until docker compose -f compose.yml exec -T db pg_isready > /dev/null 2>&1
+          do
+            sleep 2
+          done
+
       - name: Make scripts executable
         run: chmod +x scripts/*.sh
 
       - name: Run tests
         run: bats tests/
+
+      - name: Stop Docker stack
+        if: always()
+        run: docker compose -f compose.yml down -v
 
   compose:
     runs-on: ubuntu-latest
@@ -47,4 +64,4 @@ jobs:
       - name: Validate Compose configuration
         run: |
           cp .env.example .env
-          docker compose config
+          docker compose -f compose.yml config

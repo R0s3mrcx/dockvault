@@ -30,7 +30,7 @@ teardown() {
     fi
 
     cp .env.example .env
-    docker compose -f "$PROJECT_DIR/docker-compose.yml" up -d db
+    docker compose -f "$PROJECT_DIR/compose.yml" up -d db
     sleep 5
 
     run bash "$SCRIPT" --local-only
@@ -39,5 +39,5 @@ teardown() {
     count=$(ls backups/backup-*.tar.gz | wc -l)
     [ "$count" -eq 1 ]
 
-    docker compose -f "$PROJECT_DIR/docker-compose.yml" down -v
+    docker compose -f "$PROJECT_DIR/compose.yml" down -v
 }
