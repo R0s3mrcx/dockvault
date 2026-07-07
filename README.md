@@ -214,15 +214,6 @@ Every push runs a GitHub Actions workflow that:
 The workflow validates the project without deploying infrastructure or requiring Azure credentials.
 
 
-# Future Improvements
-
-- Scheduled backups
-- Backup retention policy
-- Restore verification
-- Container image publishing
-- Multi-stage production image
-
-
 # License
 
 This project is licensed under the MIT License.
