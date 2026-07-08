@@ -8,27 +8,28 @@
 
 A containerized PostgreSQL stack with automated backup, restore, and health check scripts.
 
-The project combines Docker Compose, Bash, PostgreSQL, Azure Blob Storage, automated testing, and GitHub Actions into a small operational workflow.
+The project combines Docker Compose, PostgreSQL, Bash, Azure Blob Storage, GitHub Actions, and automated testing into a small operational workflow.
 
 # Architecture
 
 ```
-             Docker Compose
-                    │
-        ┌───────────┴───────────┐
-        ▼                       ▼
-  Flask API               PostgreSQL
-        │                       │
-        └───────────┬───────────┘
-                    ▼
+            Docker Compose
+                   │
+        ┌──────────┴──────────┐
+        ▼                     ▼
+    Flask API            PostgreSQL
+        │                     │
+        └──────────┬──────────┘
+                   ▼
              Docker Network
-                    │
-                    ▼
-             Named Volume
-
-         Backup / Restore / Health
-                    │
-                    ▼
+                   │
+                   ▼
+              Named Volume
+                   │
+                   ▼
+     Backup / Restore Scripts
+                   │
+                   ▼
           Azure Blob Storage
 ```
 
